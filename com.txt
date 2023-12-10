@@ -1,0 +1,4 @@
+add ax,bx
+add ax,bx
+add ax,bx
+jmp 0
