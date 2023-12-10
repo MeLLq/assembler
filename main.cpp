@@ -2594,46 +2594,65 @@ void adc(std::string a, std::string b) {
   }
 }
 void jmp(std::string a) {
+  unsigned short int b;
+  std::stringstream s;
+  s << std::hex << a;
+  s >> b;
   char com1 = 0b11101011;
-  char com2 = (unsigned char)(std::stoi(a) - char_coms.size() - 2);
-  // short int c = (short int)(std::stoi(a) - char_coms.size() - 2);
-  // com2 = c | 0x00ff;
-  // char com3 = (c >> 8) | 0x00ff;
+  char com2 = (unsigned char)(b - char_coms.size() - 2);
   char_coms.push_back(com1);
   char_coms.push_back(com2);
-  // char_coms.push_back(com3);
 }
 void loop(std::string a) {
+  unsigned short int b;
+  std::stringstream s;
+  s << std::hex << a;
+  s >> b;
   char com1 = 0b11100010;
-  char com2 = (unsigned char)(std::stoi(a) - char_coms.size() - 2);
+  char com2 = (unsigned char)(b - char_coms.size() - 2);
   char_coms.push_back(com1);
   char_coms.push_back(com2);
 }
 void call(std::string a) {
-  char com1 = 0b11101011;
-  char com2 = (unsigned char)(std::stoi(a) - char_coms.size() - 2);
-  short int c = (short int)(std::stoi(a) - char_coms.size() - 2);
-  com2 = c | 0x00ff;
-  char com3 = (c >> 8) | 0x00ff;
+  unsigned short int b;
+  std::stringstream s;
+  s << std::hex << a;
+  s >> b;
+  char com1 = 0b11101000;
+  short int c = (short int)(b - char_coms.size() - 3);
+  char com2 = c & 0x00ff;
+  char com3 = (c >> 8) & 0x00ff;
   char_coms.push_back(com1);
   char_coms.push_back(com2);
   char_coms.push_back(com3);
 }
 void ret(std::string a) {
+  unsigned short int b;
+  std::stringstream s;
+  s << std::hex << a;
+  s >> b;
   char com1 = 0b11000011;
-  char com2 = (unsigned char)(std::stoi(a) - char_coms.size() - 2);
+  char com2 = (unsigned char)(b - char_coms.size() - 2);
   char_coms.push_back(com1);
   char_coms.push_back(com2);
 }
 void jg(std::string a) {
+  unsigned short int b;
+  std::stringstream s;
+  s << std::hex << a;
+  s >> b;
   char com1 = 0b01111111;
-  char com2 = (unsigned char)(std::stoi(a) - char_coms.size() - 2);
+  char com2 = (unsigned char)(b - char_coms.size() - 2);
   char_coms.push_back(com1);
   char_coms.push_back(com2);
 }
 void jz(std::string a) {
-  char com1 = 0b11000011;
-  char com2 = (unsigned char)(std::stoi(a) - char_coms.size() - 2);
+  unsigned short int b;
+  std::stringstream s;
+  s << std::hex << a;
+  s >> b;
+  char com1 = 0b01110100;
+  char com2 = (unsigned char)(b - char_coms.size() - 2);
   char_coms.push_back(com1);
   char_coms.push_back(com2);
 }
