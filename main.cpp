@@ -27,11 +27,6 @@ void jz(std::string a);
 
 std::vector<char> char_coms;
 
-void WriteFile(std::ofstream &file, std::string str) {
-  file.write(str.c_str(), str.size());
-  file.put('\n');
-}
-
 void WriteToMemFile() {
   std::ofstream com("mem.hex", std::ios::binary);
   for (char c : char_coms) {
@@ -41,7 +36,7 @@ void WriteToMemFile() {
   return;
 }
 
-void misha(std::ofstream &file) {
+void misha() {
   std::ifstream dota("com.txt");
   std::string com;
   std::string word;
@@ -103,10 +98,8 @@ void misha(std::ofstream &file) {
 }
 
 int main() {
-  std::ofstream file("filetest1.bin", std::ios::trunc);
   auto start = std::chrono::system_clock::now();
-  misha(file);
-  file.close();
+  misha();
   WriteToMemFile();
   auto end = std::chrono::system_clock::now();
   std::chrono::duration<double> elapsed_seconds = end - start;
